@@ -1,0 +1,34 @@
+<%
+  const body = `
+  <div class="p-4 p-md-5 hero rounded-4 shadow-sm">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <div class="badge text-bg-light text-dark mb-2">Platform Perencanaan Tugas</div>
+        <h1 class="display-6 fw-bold mb-2">EduPlan</h1>
+        <p class="lead mb-4">
+          Aplikasi untuk membantu perencanaan tugas dan aktivitas belajarmu!
+        </p>
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="btn btn-primary btn-lg" href="/tasks">Kelola Tugas</a>
+          <a class="btn btn-outline-light btn-lg" href="/prioritas">Lihat Prioritas</a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card glass border-0 rounded-4">
+          <div class="card-body">
+            <div class="fw-semibold mb-1">Fitur yang tersedia</div>
+            <ul class="small mb-0">
+              <li>Pengelolaan tugas secara terstruktur</li>
+              <li>Penentuan prioritas tugas secara otomatis</li>
+              <li>Pencatatan dan penyimpanan aktivitas belajar</li>
+              <li>Penyimpanan data tugas sebagai arsip atau cadangan</li>
+              <li>Tampilan web sederhana dan mudah dipahami</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+%>
+<%- include("layout", { title, body }) %>

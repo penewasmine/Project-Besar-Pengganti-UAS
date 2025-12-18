@@ -1,0 +1,59 @@
+<%
+  const rows = items.map((x, i) => `
+    <tr>
+      <td class="text-muted">#${i+1}</td>
+      <td class="fw-semibold">${x.task.title}</td>
+      <td><span class="badge text-bg-secondary">${x.task.course}</span></td>
+      <td>${new Date(x.task.dueDate + "T00:00:00").toLocaleDateString("id-ID")}</td>
+      <td>${Number(x.task.estimatedHours).toFixed(2)} jam</td>
+      <td><span class="badge text-bg-info">${x.task.difficulty}</span></td>
+      <td><span class="badge text-bg-primary">${x.priority}</span></td>
+      <td class="text-muted">${x.sessionsCount} (${x.totalMinutes}m)</td>
+    </tr>
+  `).join("");
+
+  const alert = exported ? `
+    <div class="alert alert-success border-0 rounded-4">
+      Unduh berhasil: <code>${exported}</code> (cek folder di <code>data/exports</code>)
+    </div>` : "";
+
+  const body = `
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+      <h2 class="mb-0">Prioritas Tugas</h2>
+      <div class="text-start" style="color: #aeaeae;">Urutan prioritas dibuat dari deadline, kesulitan tugas, estimasi pengerjaan, dan catatan sesi belajar.</div>
+    </div>
+
+    <form class="d-flex gap-2" method="get" action="/prioritas">
+      <select class="form-select" name="strategy">
+        <option value="trend" ${strategy==="trend"?"selected":""}>trend</option>
+        <option value="weighted" ${strategy==="weighted"?"selected":""}>weighted</option>
+      </select>
+      <button class="btn btn-outline-primary">Terapkan</button>
+    </form>
+  </div>
+
+  ${alert}
+
+  <div class="card shadow-sm rounded-4 mb-3">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th><th>Judul</th><th>MK</th><th>Deadline</th><th>Estimasi</th><th>Kesulitan</th><th>Prioritas</th><th>Sesi</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows || `<tr><td colspan="8" class="text-center text-muted p-4">Belum ada data. Tambah tugas & sesi.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <form method="post" action="/prioritas/export" class="d-flex gap-2 align-items-center">
+    <input type="hidden" name="strategy" value="${strategy}">
+    <button class="btn btn-success">Unduh Data</button>
+  </form>
+  `;
+%>
+<%- include("../layout", { title, body }) %>

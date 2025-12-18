@@ -1,0 +1,50 @@
+<%
+  const rows = sessions.map(s => `
+    <tr>
+      <td><span class="badge text-bg-success">${s.minutes} menit</span></td>
+      <td>${s.note ? s.note : `<span class="text-muted">-</span>`}</td>
+      <td class="text-muted small">${new Date(s.createdAt).toLocaleString("id-ID")}</td>
+    </tr>
+  `).join("");
+
+  const body = `
+  <div class="mb-3">
+    <h2 class="mb-0">Sesi Belajar</h2>
+    <div class="text-muted">${task ? `${task.title} • ${task.course}` : "Tugas tidak ditemukan"}</div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-4">
+      <div class="card shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <div class="fw-semibold mb-2">Tambah Sesi</div>
+          <form method="post" action="/sessions/${task.id}" class="vstack gap-2">
+            <label class="form-label">Durasi (menit)</label>
+            <input class="form-control" type="number" min="1" name="minutes" required>
+            <label class="form-label">Catatan</label>
+            <input class="form-control" name="note" placeholder="opsional">
+            <button class="btn btn-primary mt-2">Simpan</button>
+            <a class="btn btn-outline-secondary" href="/tasks">Kembali</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-sm rounded-4">
+        <div class="table-responsive">
+          <table class="table mb-0 align-middle">
+            <thead class="table-dark">
+              <tr><th>Durasi</th><th>Catatan</th><th>Waktu</th></tr>
+            </thead>
+            <tbody>
+              ${rows || `<tr><td colspan="3" class="text-center text-muted p-4">Belum ada sesi. Tambahkan beberapa untuk efek <b>trend</b>.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+%>
+<%- include("../layout", { title, body }) %>

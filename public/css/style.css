@@ -1,0 +1,19 @@
+body { background: #0b1220; color: #e9eefc; }
+.card, .table { background: #0f1a31; color: #e9eefc; }
+.table thead th { border-color: rgba(255,255,255,.08); }
+.table td, .table th { border-color: rgba(255,255,255,.06); }
+.hero {
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(77, 168, 255, .35), transparent),
+              radial-gradient(900px 500px at 90% 20%, rgba(130, 87, 229, .35), transparent),
+              linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+}
+.glass { background: rgba(255,255,255,.06); backdrop-filter: blur(10px); }
+a, .nav-link { color: #cfe2ff; }
+.nav-link:hover { color: #ffffff; }
+.form-control, .form-select {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: #e9eefc;
+}
+.form-control:focus, .form-select:focus { box-shadow: none; border-color: rgba(77,168,255,.6); }
+code { color: #9ad1ff; }
